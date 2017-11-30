@@ -11,8 +11,10 @@ import { AboutComponent } from './about/about.component'
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { RestaurantComponent } from './restaurants/restaurant/restaurant.component'
 
-import {ROUTES} from './app.routes';
+import {HTTP_INTERCEPTORS} from '@angular/common/http'
+import {Interceptor} from './app.httpInterceptor'
 
+import {ROUTES} from './app.routes';
 
 import {RestaurantsService} from './restaurants/restaurants.service'
 
@@ -32,7 +34,14 @@ import {RestaurantsService} from './restaurants/restaurants.service'
     RouterModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [RestaurantsService],
+  providers: [
+    RestaurantsService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true
+    }       
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

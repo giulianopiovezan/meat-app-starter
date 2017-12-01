@@ -23,7 +23,7 @@ export class Interceptor implements HttpInterceptor{
             }
         }).catch((response: HttpEvent<any>) => {
             if(response instanceof HttpErrorResponse){
-                if((<HttpErrorResponse> response).status == 404){
+                if((<HttpErrorResponse> response).status == 404 || 500){
                     console.log('Ocorreu um erro interno no servidor')
                 }
             }

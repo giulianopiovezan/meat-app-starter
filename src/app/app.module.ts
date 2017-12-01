@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 //import {HttpModule} from '@angular/http'
 import { RouterModule } from '@angular/router';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
@@ -15,7 +15,15 @@ import {Interceptor} from './app.httpInterceptor'
 
 import {ROUTES} from './app.routes';
 
-import {RestaurantsService} from './restaurants/restaurants.service'
+import {RestaurantsService} from './restaurants/restaurants.service';
+import {ShoppingCartService} from './restaurant-detail/shopping-cart/shopping-cart.service'
+
+import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail.component';
+import { MenuComponent } from './restaurant-detail/menu/menu.component';
+import { ShoppingCartComponent } from './restaurant-detail/shopping-cart/shopping-cart.component';
+import { MenuItemComponent } from './restaurant-detail/menu-item/menu-item.component';
+import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component';
+import { OrderComponent } from './order/order.component'
 
 
 @NgModule({
@@ -25,7 +33,13 @@ import {RestaurantsService} from './restaurants/restaurants.service'
     HomeComponent,
     AboutComponent,
     RestaurantsComponent,
-    RestaurantComponent
+    RestaurantComponent,
+    RestaurantDetailComponent,
+    MenuComponent,
+    ShoppingCartComponent,
+    MenuItemComponent,
+    ReviewsComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
@@ -34,10 +48,15 @@ import {RestaurantsService} from './restaurants/restaurants.service'
   ],
   providers: [
     RestaurantsService,
+    ShoppingCartService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi: true
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt-BR'
     }       
   ],
   bootstrap: [AppComponent]
